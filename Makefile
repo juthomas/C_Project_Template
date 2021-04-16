@@ -46,7 +46,7 @@ OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 OBJ_DIRS = $(OBJ_DIR) \
 	$(TEMPLATE_DIR:%=$(OBJ_DIR)/%)
 
-INCLUDES = $(INCLUDE_H:%=./$(INC_DIR)/%.h)
+INCLUDES = $(INC_H:%=./$(INC_DIR)/%.h)
 
 ## Rules of Makefile
 
