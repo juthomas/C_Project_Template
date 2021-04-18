@@ -78,12 +78,41 @@ fclean: clean
 
 re: fclean all
 
+define print_random_fortune
+	@i=$$((RANDOM % 6));\
+	if [ $${i} = "0" ] ; \
+	then \
+	f="\"Any excuse will serve a tyrant.\"\n\t\t-- Aesop" ; \
+	elif [ $${i} = "1" ] ; \
+	then \
+	f="Women complain about sex more than men.  Their gripes fall into two\n\
+	categories: (1) Not enough and (2) Too much.\n\
+	\t\t-- Ann Landers" ; \
+	elif [ $${i} = "2" ] ; \
+	then \
+	f="You are a bundle of energy, always on the go." ; \
+	elif [ $${i} = "3" ] ; \
+	then \
+	f="Suffering alone exists, none who suffer;\n\
+	The deed there is, but no doer thereof;\n\
+	Nirvana is, but no one is seeking it;\n\
+	The Path there is, but none who travel it.\n\
+	\t\t-- \"Buddhist Symbolism\", Symbols and Values" ; \
+	elif [ $${i} = "4" ] ; \
+	then \
+	f="The girl who remembers her first kiss now has a daughter who can't even\n\
+	remember her first husband." ; \
+	else \
+	f="I have nothing to tell you" ; \
+	fi ; \
+	echo "\0033[1;37m$${f}\0033[1;37m"
+endef
 
 define print_aligned_coffee
-    @t=$(NAME); \
+	@t=$(NAME); \
 	l=$${#t};\
 	i=$$((8 - l / 2));\
-	echo "\0033[1;32m\033[3C\033[$${i}CAnd Your program \"$(NAME)\" "
+	echo "\0033[1;32m\033[3C\033[$${i}CAnd Your program \"$(NAME)\"\0033[1;37m"
 endef
 
 coffee: all clean
@@ -106,5 +135,7 @@ coffee: all clean
 	@echo ""
 	@echo "\0033[1;32m\033[3C          Take Your Coffee"
 	$(call print_aligned_coffee)
+	@echo ""
+	$(call print_random_fortune)
 
 .PHONY: all clean fclean re coffee
